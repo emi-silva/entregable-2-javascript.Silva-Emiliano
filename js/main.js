@@ -1,18 +1,19 @@
-const nombreTienda = "Electrónica Rosario"; // Constantes y variables
+// CONSTANTES Y VARIABLES:
+const nombreTienda = "Electronica Rosario"; 
 let totalCarrito = 0;
 
-
-let productos = [ // Array de productos
-  { id: 1, nombre: "Televisor", precio: 1200000, categoria: "Electrónica" },
-  { id: 2, nombre: "Laptop", precio: 900000, categoria: "Computadoras" },
-  { id: 3, nombre: "Celular", precio: 800000, categoria: "Telefonía" }
+//ARRAY DE PRODUCTOS
+let productos = [ 
+  { id: 1, nombre: "Televisor", precio: 1200000, categoria: "Electronica" },
+  { id: 2, nombre: "PC-Gamer", precio: 900000, categoria: "Computadoras" },
+  { id: 3, nombre: "Celular", precio: 800000, categoria: "Telefonia" }
 ];
 
+// ARRAY DE CARRITO
+let carrito = []; 
 
-let carrito = []; // Array del carrito
-
-
-function agregarAlCarrito() { // Función para agregar producto al carrito
+// FUNCION PARA AGREGAR PRODUCTOS AL CARRITO
+function agregarAlCarrito() { 
   const idProducto = parseInt(prompt("Ingrese el ID del producto que quiere agregar al carrito:"));
   const producto = productos.find(item => item.id === idProducto);
   
@@ -28,7 +29,8 @@ function agregarAlCarrito() { // Función para agregar producto al carrito
   mostrarCarrito();
 }
 
-function eliminarDelCarrito() { // Función para eliminar producto del carrito
+// FUNCION PARA ELIMINAR PRODUCTOS DEL CARRITO
+function eliminarDelCarrito() { 
   const idProducto = parseInt(prompt("Ingrese el ID del producto que desea eliminar del carrito:"));
   const indiceProducto = carrito.findIndex(item => item.id === idProducto);
   
@@ -51,8 +53,8 @@ function eliminarDelCarrito() { // Función para eliminar producto del carrito
   mostrarCarrito();
 }
 
-
-function mostrarCarrito() { // Función para mostrar el carrito
+// FUNCION PARA MOSTRAR EL CARRITO
+function mostrarCarrito() { 
   console.log("=== Carrito ===");
   if (carrito.length === 0) {
     console.log("El carrito esta vacio.");
@@ -68,8 +70,8 @@ function mostrarCarrito() { // Función para mostrar el carrito
   console.log(`Total del carrito: $${totalCarrito}`);
 }
 
-
-function mostrarProductos() { // Función para mostrar productos disponibles
+// FUNCION PARA MOSTRAR LOS PRODUCTOS DISPONIBLES
+function mostrarProductos() { 
   let listaProductos = "=== Productos Disponibles ===\n";
   productos.forEach((producto) => {
     listaProductos += `${producto.id}. ${producto.nombre} - $${producto.precio} (${producto.categoria})\n`;
@@ -78,8 +80,8 @@ function mostrarProductos() { // Función para mostrar productos disponibles
   alert(listaProductos); // Muestra los productos disponibles en un alert
 }
 
-
-function iniciarCompra() { // Ejemplo de interacción con cuadros de diálogo
+// EJEMPLO DE INTERACCION DE CUADROS DE DIALOGO
+function iniciarCompra() { 
   let opcion;
   do {
     opcion = prompt(`Bienvenido a ${nombreTienda}\n1. Ver productos\n2. Agregar al carrito\n3. Eliminar del carrito\n4. Ver carrito\n5. Salir\nElija una opción:`);
@@ -108,5 +110,5 @@ function iniciarCompra() { // Ejemplo de interacción con cuadros de diálogo
   } while (opcion !== '5');
 }
 
-// Iniciar el proceso de compra
-iniciarCompra();
+// INICIAR EL PROCESO DE COMPRA
+iniciarCompra(); 
