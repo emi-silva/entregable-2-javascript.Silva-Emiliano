@@ -1,0 +1,16 @@
+ /* Estilo básico para mejorar la visualización */
+ body {
+  font-family: Arial, sans-serif;
+}
+#productos, #carrito {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.producto {
+  margin-bottom: 10px;
+}
+.item-carrito {
+  margin: 5px 0;
+}

@@ -1,14 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entregable1-JS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <title>Electronica Rosario</title>
 </head>
 <body>
-  <script src="js/main.js"></script>
-  
-  <h1>Entregable 1 proyecto de e-comerce " Silva Emiliano"</h1>
+    <h1>Bienvenido a Electronica Rosario</h1>
 
+    <section id="productos">
+        <h2>Productos Disponibles</h2>
+        
+        <!-- Televisor -->
+        <div class="producto">
+            <h3>Televisor</h3>
+            <p>Precio: $1200000</p>
+            <p>Categoría: Electrónica</p>
+            <button class="btn-agregar" data-id="1">Agregar al Carrito</button>
+        </div>
+
+        <!-- PC Gamer -->
+        <div class="producto">
+            <h3>PC Gamer</h3>
+            <p>Precio: $900000</p>
+            <p>Categoría: Computadoras</p>
+            <button class="btn-agregar" data-id="2">Agregar al Carrito</button>
+        </div>
+
+        <!-- Celular -->
+        <div class="producto">
+            <h3>Celular</h3>
+            <p>Precio: $800000</p>
+            <p>Categoría: Telefonía</p>
+            <button class="btn-agregar" data-id="3">Agregar al Carrito</button>
+        </div>
+    </section>
+
+    <section id="carrito">
+        <h2>Carrito de Compras</h2>
+        <div id="lista-carrito"></div>
+        <p>Total: $<span id="total-carrito">0</span></p>
+    </section>
+
+    <!-- Vincular JavaScript -->
+    <script src="/js/main.js"></script>
 </body>
 </html>
