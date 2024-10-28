@@ -1,67 +1,87 @@
-// Carga Correcta del JavaScript
-console.log("JavaScript se esta ejecutando correctamente");
+console.log("Script cargado"); // Confirmación de carga
 
-// CONSTANTES Y VARIABLES:
-const nombreTienda = "Electronica Rosario"; 
-let totalCarrito = 0;
-let carrito = []; 
-
-// ARRAY DE PRODUCTOS
-const productos = [ 
-  { id: 1, nombre: "Televisor", precio: 1200000, categoria: "Electrónica" },
-  { id: 2, nombre: "PC Gamer", precio: 900000, categoria: "Computadoras" },
-  { id: 3, nombre: "Celular", precio: 800000, categoria: "Telefonía" }
+// Productos disponibles
+const productos = [
+    { id: 1, nombre: "Televisor", precio: 1200000, categoria: "Electrónica" },
+    { id: 2, nombre: "PC Gamer", precio: 900000, categoria: "Computadoras" },
+    { id: 3, nombre: "Celular", precio: 800000, categoria: "Telefonía" }
 ];
 
-// Referencias al DOM
-const listaCarrito = document.getElementById("lista-carrito");
-const totalCarritoElemento = document.getElementById("total-carrito");
+// Inicializar carrito desde localStorage o vacío
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-// FUNCION PARA AGREGAR PRODUCTOS AL CARRITO
-function agregarAlCarrito(idProducto) { 
-  const producto = productos.find(item => item.id === idProducto);
-  
-  if (producto) {
-    carrito.push(producto);
-    totalCarrito += producto.precio;
-    actualizarCarritoDOM();
-  }
+// Función para mostrar los productos en el DOM
+function mostrarProductos() {
+    const productosContainer = document.getElementById("productos-container");
+    productosContainer.innerHTML = ""; // Limpiar el contenedor
+
+    productos.forEach(producto => {
+        const productoDiv = document.createElement("div");
+        productoDiv.classList.add("producto");
+        productoDiv.innerHTML = `
+            <h3>${producto.nombre}</h3>
+            <p>Precio: $${producto.precio}</p>
+            <p>Categoría: ${producto.categoria}</p>
+            <button onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+        `;
+        productosContainer.appendChild(productoDiv);
+    });
 }
 
-// FUNCION PARA ELIMINAR PRODUCTOS DEL CARRITO
-function eliminarDelCarrito(indice) { 
-  const producto = carrito[indice];
-  
-  if (producto) {
-    totalCarrito -= producto.precio;
-    carrito.splice(indice, 1); // Eliminar producto del carrito
-    actualizarCarritoDOM();
-  }
+// Función para agregar productos al carrito y guardar en localStorage
+function agregarAlCarrito(id) {
+    const producto = productos.find(p => p.id === id);
+    if (producto) {
+        carrito.push(producto);
+        actualizarCarrito();
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        alert(`${producto.nombre} ha sido agregado al carrito.`);
+    }
 }
 
-// FUNCION PARA ACTUALIZAR EL CARRITO EN EL DOM
-function actualizarCarritoDOM() { 
-  // Limpiar contenido previo del carrito
-  listaCarrito.innerHTML = "";
+// Función para actualizar el DOM del carrito
+function mostrarCarrito() {
+    const carritoContainer = document.getElementById("carrito-container");
+    carritoContainer.innerHTML = ""; // Limpiar el contenedor
 
-  carrito.forEach((item, indice) => {
-    const itemElemento = document.createElement("div");
-    itemElemento.className = "item-carrito";
-    itemElemento.innerHTML = `
-      ${item.nombre} - $${item.precio}
-      <button onclick="eliminarDelCarrito(${indice})">Eliminar</button>
-    `;
-    listaCarrito.appendChild(itemElemento);
-  });
+    let total = 0;
+    carrito.forEach((producto, index) => {
+        const productoDiv = document.createElement("div");
+        productoDiv.classList.add("producto");
+        productoDiv.innerHTML = `
+            <p>${producto.nombre} - $${producto.precio}</p>
+            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+        `;
+        carritoContainer.appendChild(productoDiv);
+        total += producto.precio;
+    });
 
-  // Actualizar el total en el DOM
-  totalCarritoElemento.textContent = totalCarrito;
+    document.getElementById("total").textContent = `Total: $${total}`;
 }
 
-// AGREGAR EVENTOS A BOTONES DE PRODUCTOS
-document.querySelectorAll(".btn-agregar").forEach(boton => {
-  boton.addEventListener("click", (e) => {
-    const idProducto = parseInt(e.target.getAttribute("data-id"));
-    agregarAlCarrito(idProducto);
-  });
+// Función para eliminar productos del carrito y actualizar en localStorage
+function eliminarDelCarrito(indice) {
+    carrito.splice(indice, 1);
+    actualizarCarrito();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    alert("Producto eliminado del carrito.");
+}
+
+// Función para vaciar el carrito
+function vaciarCarrito() {
+    carrito = [];
+    actualizarCarrito();
+    localStorage.removeItem("carrito");
+    alert("Carrito vaciado.");
+}
+
+// Función para actualizar el carrito en el DOM y localStorage
+function actualizarCarrito() {
+    mostrarCarrito();
+}
+
+// Cargar los productos y el carrito inicial al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    mostrarProductos();
+    mostrarCarrito();
 });

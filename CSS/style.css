@@ -1,16 +1,97 @@
- /* Estilo básico para mejorar la visualización */
- body {
+/* Estilos Generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-#productos, #carrito {
-  margin: 20px 0;
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
 }
+
+/* Contenedor Principal */
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#productos-container, .carrito {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Estilos de los Productos */
 .producto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.producto:last-child {
+  border-bottom: none;
+}
+
+h3 {
+  color: #555;
+  font-size: 1.2em;
   margin-bottom: 10px;
 }
-.item-carrito {
+
+p {
   margin: 5px 0;
+}
+
+/* Botones */
+button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Carrito */
+.carrito h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#carrito-container {
+  margin-top: 10px;
+}
+
+#total {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.carrito button {
+  margin-top: 15px;
 }
